@@ -73,15 +73,17 @@ namespace AutoProtonCreator
 
             var options = new ChromeOptions();
             options.AddArgument("--start-maximized");
+            options.AddArgument("--no-sandbox");
+            options.AddArgument("--disable-dev-shm-usage");
 
             // Get path to the folder where your .exe (and chromedriver.exe) will be
             string driverPath = AppDomain.CurrentDomain.BaseDirectory;
 
-            // Create ChromeDriverService to point to that path
             var driverService = ChromeDriverService.CreateDefaultService(driverPath);
+            driverService.HideCommandPromptWindow = true;
 
-            // Now create ChromeDriver with that service and options
             driver = new ChromeDriver(driverService, options);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
         }
 
         private static void LoadWordsFromFile(string path)
@@ -241,22 +243,22 @@ namespace AutoProtonCreator
                 try
                 {
                     // 1. Click "Let's get started"
-                    var letsGetStarted = WaitForElement("#modal-340-description > footer > button", 120);
+                    var letsGetStarted = WaitForElement("div[id^='modal-'][id$='description'] > footer > button", 30);
                     letsGetStarted?.Click();
                     System.Threading.Thread.Sleep(500);
 
                     // 2. Click "Maybe later"
-                    var maybeLater = WaitForElement("#modal-340-description > footer > button", 120);
+                    var maybeLater = WaitForElement("div[id^='modal-'][id$='description'] > footer > button", 120);
                     maybeLater?.Click();
                     System.Threading.Thread.Sleep(500);
 
                     // 3. Click "Next"
-                    var nextButton = WaitForElement("#modal-340-description > div:nth-child(1) > div:nth-child(2) > footer > button", 120);
+                    var nextButton = WaitForElement("div[id^='modal-'][id$='description'] div > div > footer > button", 120);
                     nextButton?.Click();
                     System.Threading.Thread.Sleep(500);
 
                     // 4. Click "Use this"
-                    var useThis = WaitForElement("#modal-340-description > footer > button", 120);
+                    var useThis = WaitForElement("div[id^='modal-'][id$='description'] > footer > button", 120);
                     useThis?.Click();
                 }
                 catch (Exception ex)

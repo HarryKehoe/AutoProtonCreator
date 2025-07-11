@@ -63,6 +63,9 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Costura, Version=6.0.0.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
       <HintPath>..\packages\Costura.Fody.6.0.0\lib\netstandard2.0\Costura.dll</HintPath>
@@ -149,6 +152,7 @@
   <ItemGroup>
     <Content Include="chromedriver.exe" />
     <Content Include="FodyWeavers.xml" />
+    <Content Include="icon.ico" />
     <Content Include="words.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
